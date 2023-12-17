@@ -42,7 +42,8 @@ class DataTransformation:
         try:
             logging.info("Data Transformation intiated")
             train_df = pd.read_csv(train_data_path)
-            #train_df.drop(columns=[],index=True)
+            train_df = train_df.drop(columns=["Item_Outlet_Sales",'Item_Identifier','Outlet_Identifier'],axis=1)
+            
             categorical_col = train_df.select_dtypes(include='object').columns.to_list()
             numerical_col = train_df.select_dtypes(exclude='object').columns.to_list()
  
@@ -100,6 +101,7 @@ class DataTransformation:
             train_df = pd.read_csv(train_path)
             test_df = pd.read_csv(test_path)
 
+
             logging.info("Read train and test is completed")
             logging.info(f"Train Dataframe Head : \n {train_df.head().to_string()}")
             logging.info(f'Test Dataframe Head  : \n{test_df.head().to_string()}')
@@ -107,6 +109,7 @@ class DataTransformation:
             logging.info("Obtaining preprocessing object")
 
             preprocessing_obj = self.get_data_transformation_object(train_path)
+            
 
             target_col = "Item_Outlet_Sales"
             drop_col = [target_col,'Item_Identifier','Outlet_Identifier']

@@ -4,10 +4,9 @@ from src.logger import logging
 from src.utils import save_object
 from src.exception import CustomException
 import pandas as pd
-#from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
 from src.components.data_transformation import DataTransformation
-
 # Initialize the Data Injestion Configuration
 
 @dataclass
@@ -27,13 +26,12 @@ class DataInjestion:
 
         try:
             df = pd.read_csv(os.path.join('notebook/data','Train.csv'))
-            logging.info("Train Dataset read as pandas Dataframe")
+            logging.info("Dataset read as pandas Dataframe")
             os.makedirs(os.path.dirname(self.injestion_config.train_data_path),exist_ok=True)
-            df.to_csv(self.injestion_config.train_data_path,index= False, header=True)
-
-            df= pd.read_csv(os.path.join('notebook/data','Test.csv'))
-            logging.info("Test Dataset read as pandas Dataframe")
-            df.to_csv(self.injestion_config.test_data_path,header=True,index= False)
+            logging.info("Train Test Split")
+            train_set,test_set = train_test_split(df,test_size=0.3,random_state=42)
+            train_set.to_csv(self.injestion_config.train_data_path,index= False, header=True)
+            test_set.to_csv(self.injestion_config.test_data_path,header=True,index= False)
 
 
             return (
