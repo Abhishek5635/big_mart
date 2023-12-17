@@ -1,11 +1,12 @@
 import os
 import sys
 from src.logger import logging
+from src.utils import save_object
 from src.exception import CustomException
 import pandas as pd
 #from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
-#from src.components.data_transformation import DataTransformation
+from src.components.data_transformation import DataTransformation
 
 # Initialize the Data Injestion Configuration
 
@@ -48,6 +49,8 @@ class DataInjestion:
 
 if __name__=='__main__':
     obj = DataInjestion()
-    train_data,test_data = obj.initiate_data_injestion()
+    train_data_path,test_data_path = obj.initiate_data_injestion()
+    data_transformation_obj= DataTransformation()
+    train_arr, test_arr, prepocessor_obj_file_path = data_transformation_obj.initiate_data_transformation(train_data_path,test_data_path)
 
 
