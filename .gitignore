@@ -109,9 +109,10 @@ venv/
 ENV/
 env.bak/
 venv.bak/
-vevn
+venv/
+
 # Files to be Ignored
-artifacts/Train.csv
+
 
 # Spyder project settings
 .spyderproject
@@ -130,3 +131,4 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+/artifacts
